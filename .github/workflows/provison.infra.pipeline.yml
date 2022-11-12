@@ -1,0 +1,53 @@
+name: 'Provison.Infra'
+
+on: #Allow plan to run on PR
+  pull_request:
+      paths:
+        - '**'
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+   inputs:
+    enableManualDeployement :
+      description: 'Click to enable manual deployment from a non master branch to the test environment.'
+      default: false
+      required: true
+      type: boolean
+jobs:
+  Plan:
+    name: Plan
+    runs-on: ubuntu-latest
+    environment: test
+    timeout-minutes: 720
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
+      STATESTORAGE: iaccode
+      STATECONTAINER: states
+      STATERG: rg-infra
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+   
+    - name: Terraform Init
+      working-directory: ./Test
+      run: terraform init  -backend-config=key="test.tfstate"
+        
+    - name: Terraform Plan
+      working-directory: ./Test
+      run: terraform plan -var-file="test.tfvars" -input=false
+
+    - name: Terraform Apply  
+      working-directory: ./Test
+      run: terraform apply -var-file="test.tfvars" -input=false -auto-approve
