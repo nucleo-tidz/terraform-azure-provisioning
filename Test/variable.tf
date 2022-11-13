@@ -5,3 +5,7 @@ variable "resource_group_name" {
 variable "infra_location" {
   type = string
 }
+
+variable "keyvault_name" {
+  type = string
+}

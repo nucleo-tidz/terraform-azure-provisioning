@@ -1,6 +1,6 @@
 resource "azurerm_key_vault" "example" {
-  name                        = "nucleo-test-kv"
-  location                    = infra_location
+  name                        = var.keyvault_name
+  location                    = var.infra_location
   resource_group_name         = azurerm_resource_group.nucleotidz_resource_group.name
   enabled_for_disk_encryption = true
   tenant_id                   = "eaf4a4cd-97f4-477a-8d21-50da33ef2a64"
