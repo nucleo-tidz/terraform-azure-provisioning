@@ -43,20 +43,20 @@ resource "azurerm_key_vault"   "nucleo_key_vault" {
     ]
 
     storage_permissions = [
-       "backup",
-    "delete",
-    "deletesas",
-    "get",
-    "getsas",
-    "list",
-    "listsas",
-    "purge",
-    "recover",
-    "regeneratekey",
-    "restore",
-    "set",
-    "setsas",
-    "update",
+       "Backup",
+    "Backup",
+    "DeleteSAS",
+    "Get",
+    "GetSAS",
+    "List",
+    "ListSAS",
+    "Purge",
+    "Recover",
+    "RegenerateKey",
+    "Restore",
+    "Set",
+    "SetSAS ",
+    
     ]
   }
   }
