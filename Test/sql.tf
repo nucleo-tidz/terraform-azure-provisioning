@@ -11,12 +11,12 @@ resource "azurerm_mssql_server" "nucleo_sql_server" {
 
 resource "azurerm_mssql_firewall_rule" "sql_server_firewall_rule" {
   name             = "ALLOWAZURE"
-  server_id        = azurerm_mssql_server.rock_sql_server.id
+  server_id        = azurerm_mssql_server.nucleo_sql_server.id
   start_ip_address = "0.0.0.0"
   end_ip_address   = "0.0.0.0"
 }
 
-resource "azurerm_mssql_database" "rock_integration_sql_db" {
+resource "azurerm_mssql_database" "nucleo_integration_sql_db" {
   name                        = "nucleotidz-integration"
   server_id                   = azurerm_mssql_server.nucleo_sql_server.id
   collation                   = "SQL_Latin1_General_CP1_CI_AS"
