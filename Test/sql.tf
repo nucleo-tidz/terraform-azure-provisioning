@@ -25,9 +25,7 @@ resource "azurerm_mssql_database" "rock_integration_sql_db" {
   sku_name                    = var.integration_db_sku_name
   max_size_gb                 = var.integration_db_max_size_gb
   zone_redundant              = var.integration_db_zone_redundant
-  tags                        = merge(local.maersk_common_tags, {
-    "Self Managed"            = "Yes"
-  })
+  
 }
 
 resource "random_password" "nucleo_sql_server_user" {
