@@ -9,25 +9,25 @@ variable "infra_location" {
 variable "keyvault_name" {
   type = string
 }
-variable "tenant_id"{
-type=string
+variable "tenant_id" {
+  type = string
 }
-variable "object_id"{
-type=string
-}
-
-variable sql_server_name {
+variable "object_id" {
   type = string
 }
 
-variable integration_db_sku_name {
+variable "sql_server_name" {
   type = string
 }
 
-variable integration_db_max_size_gb {
+variable "integration_db_sku_name" {
   type = string
 }
 
-variable integration_db_zone_redundant {
+variable "integration_db_max_size_gb" {
+  type = string
+}
+
+variable "integration_db_zone_redundant" {
   type = string
 }
