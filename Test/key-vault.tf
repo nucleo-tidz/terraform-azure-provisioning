@@ -59,4 +59,4 @@ resource "azurerm_key_vault"   "nucleo_key_vault" {
     
     ]
   }
-  }
+}
