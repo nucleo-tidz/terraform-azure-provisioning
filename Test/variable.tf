@@ -9,3 +9,9 @@ variable "infra_location" {
 variable "keyvault_name" {
   type = string
 }
+variable "tenant_id"{
+type=string
+}
+variable "object_id"{
+type=string
+}
