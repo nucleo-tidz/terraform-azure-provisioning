@@ -55,7 +55,7 @@ resource "azurerm_key_vault"   "nucleo_key_vault" {
     "RegenerateKey",
     "Restore",
     "Set",
-    "SetSAS ",
+    "SetSAS",
     
     ]
   }
