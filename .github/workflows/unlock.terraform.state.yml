@@ -6,8 +6,8 @@ on:
       lock-id:
         description: "Lock Id"
         type: string
-        required: false
-        default: '6638e010-8fb0-46cf-ahma-21e806602f3a'
+        required: true
+        
       stage:
         type: choice
         description: stage to run
@@ -16,13 +16,36 @@ on:
         - preprod
         required: true
 jobs:
- build:
+  Plan:
+    name: Unlock
     runs-on: ubuntu-latest
+    environment: test
+    timeout-minutes: 720
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
+      STATESTORAGE: iaccode
+      STATECONTAINER: states
+      STATERG: rg-infra
+    defaults:
+      run:
+        shell: bash
 
     steps:
-      - uses: actions/checkout@v2
 
-      - name: greet
-        run: | 
-          echo "stage is ${{ github.event.inputs.stage }} / ${{ inputs.stage }}"
-          echo "choice is ${{ github.event.inputs.lock-id }}" / ${{ inputs.lock-id }}
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+   
+    - name: Terraform Init
+      working-directory: ./Test
+      run: terraform init  -backend-config=key="test.tfstate"
+        
+    - name: Terraform Unlock
+      if: ${{inputs.stage=='test'}}
+      working-directory: ./Test
+      run: terraform force-unlock -force ${{ inputs.lock-id }}
