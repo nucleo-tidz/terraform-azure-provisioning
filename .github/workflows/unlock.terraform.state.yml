@@ -1,0 +1,36 @@
+name: 'unlock.terraform.state'
+
+on: 
+  push:
+    branches:
+      - 'master'
+      - 'release-**'
+      - 'unlock-**'
+     #Allow push events on main and release branches
+  workflow_dispatch:
+   inputs:
+      lock-id:
+        description: "Lock Id"
+        type: string
+        required: false
+        default: '6638e010-8fb0-46cf-ahma-21e806602f3a'
+      stage:
+        description: "Lock Id"
+        type: choice
+         options: 
+        - test
+        - preprod
+        - prod
+        required: true
+jobs:
+ build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: greet
+        run: | 
+          echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
+          echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
+          echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
