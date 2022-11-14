@@ -15,6 +15,10 @@ on:
         - test
         - preprod
         required: true
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
 jobs:
   Plan:
     name: Unlock
