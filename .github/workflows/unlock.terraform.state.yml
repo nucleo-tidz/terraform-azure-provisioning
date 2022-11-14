@@ -15,12 +15,11 @@ on:
         required: false
         default: '6638e010-8fb0-46cf-ahma-21e806602f3a'
       stage:
-        description: "Lock Id"
         type: choice
-         options: 
+        description: stage to run
+        options: 
         - test
         - preprod
-        - prod
         required: true
 jobs:
  build:
