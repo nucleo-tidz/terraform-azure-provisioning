@@ -1,12 +1,6 @@
 name: 'unlock.terraform.state'
 
-on: 
-  push:
-    branches:
-      - 'master'
-      - 'release-**'
-      - 'unlock-**'
-     #Allow push events on main and release branches
+on:
   workflow_dispatch:
    inputs:
       lock-id:
@@ -30,6 +24,5 @@ jobs:
 
       - name: greet
         run: | 
-          echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
-          echo "boolean is ${{ github.event.inputs.boolean }}" / ${{ inputs.boolean }} 
-          echo "choice is ${{ github.event.inputs.choice }}" / ${{ inputs.choice }}
+          echo "stage is ${{ github.event.inputs.stage }} / ${{ inputs.stage }}"
+          echo "choice is ${{ github.event.inputs.lock-id }}" / ${{ inputs.lock-id }}
