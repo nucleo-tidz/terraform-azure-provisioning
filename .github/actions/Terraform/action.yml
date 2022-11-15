@@ -1,0 +1,31 @@
+name: 'Unlock'
+description: "Composite to unlock"
+inputs:
+  state-file:
+    description: 'File name in which state is  maintained'
+    required: true
+  lock-id:
+    description: 'Lock id of tf state file'
+    required: true
+  working-directory:
+    description: The directory where the main.tf is located
+    required: true
+    default: .
+
+
+
+runs: 
+  using: "composite"
+  steps:
+   - name: Setup Terraform
+     uses: hashicorp/setup-terraform@v2
+
+   - name: Terraform Init
+     working-directory: ${{ inputs.working-directory }}
+     shell: bash
+     run: terraform init -backend-config=key="${{ inputs.state-file }}"
+
+   - name: Terraform Unlock
+     working-directory: ${{ inputs.working-directory }}
+     shell: bash
+     run: terraform force-unlock -force ${{ inputs.lock-id }}
