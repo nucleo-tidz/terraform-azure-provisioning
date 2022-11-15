@@ -22,11 +22,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
       ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
-      state-file : "test.tfstate"
-    defaults:
-      run:
-        shell: bash
-
+      state-file : ""
     steps:
 
     - name: Checkout
@@ -36,7 +32,7 @@ jobs:
       run: |
        if ${{inputs.environment=='test'}}
        then
-         ECHO "state-file=ahmar">> $GITHUB_ENV
+         echo "state-file=test.tfstate">> $GITHUB_ENV
        fi
 
     - name: Send greeting
@@ -45,7 +41,7 @@ jobs:
     - name: Unlock
       uses: ./.github/actions/Terraform
       with:
-           state-file: "test.tfstate"
+           state-file: ${{env.state-file}}
            lock-id: "${{ inputs.lock-id }}"
            working-directory: ./Test
    
