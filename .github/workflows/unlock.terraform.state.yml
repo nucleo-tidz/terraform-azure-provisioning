@@ -42,8 +42,7 @@ jobs:
     - name: Set Sate file
       run: |
        if($env=="test"){
-         ECHO "state-file=ahmar"
-         }
+         ECHO "state-file=ahmar">> $GITHUB_ENV }
     - name: Send greeting
       run: echo "${{ env.state-file }}"
     - name: Unlock
