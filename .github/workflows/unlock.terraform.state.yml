@@ -6,15 +6,7 @@ on:
       lock-id:
         description: "Lock Id"
         type: string
-        required: true
-        
-      stage:
-        type: choice
-        description: stage to run
-        options: 
-        - test
-        - preprod
-        required: true
+        required: true 
       environment:
         description: 'Environment to run tests against'
         type: environment
@@ -39,12 +31,17 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v3
+
     - name: Set Sate file
       run: |
-       if($env=="test"){
-         ECHO "state-file=ahmar">> $GITHUB_ENV }
+       if ${{inputs.environment=='test'}}
+       then
+         ECHO "state-file=ahmar">> $GITHUB_ENV
+       fi
+
     - name: Send greeting
       run: echo "${{ env.state-file }}"
+
     - name: Unlock
       uses: ./.github/actions/Terraform
       with:
