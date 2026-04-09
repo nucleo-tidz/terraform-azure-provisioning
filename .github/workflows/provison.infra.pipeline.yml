@@ -46,8 +46,14 @@ jobs:
         
     - name: Terraform Plan
       working-directory: ./Test
-      run: terraform plan -var-file="test.tfvars" -input=false
+      run: terraform plan -var-file="test.tfvars" -input=false -out=tfplan
 
-    - name: Terraform Apply  
-      working-directory: ./Test
-      run: terraform apply -var-file="test.tfvars" -input=false -auto-approve
+    - name: Upload Terraform Plan
+      uses: actions/upload-artifact@v4
+      with:
+        name: tfplan
+        path: ./Test/tfplan
+
+    # - name: Terraform Apply  
+    #   working-directory: ./Test
+    #   run: terraform apply -var-file="test.tfvars" -input=false -auto-approve
