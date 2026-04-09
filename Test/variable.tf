@@ -31,3 +31,8 @@ variable "integration_db_max_size_gb" {
 variable "integration_db_zone_redundant" {
   type = string
 }
+variable "db_password" {
+  description = "Database administrator password"
+  type        = string
+  sensitive   = true
+}

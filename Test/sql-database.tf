@@ -5,7 +5,7 @@ resource "azurerm_mssql_server" "nucleo_sql_server" {
   location                     = var.infra_location
   version                      = "12.0"
   administrator_login          = random_password.nucleo_sql_server_user.result
-  administrator_login_password = random_password.nucleo_sql_server_password.result
+  administrator_login_password = var.db_password
   minimum_tls_version          = "1.2"
 }
 
