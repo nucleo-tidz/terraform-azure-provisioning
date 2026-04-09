@@ -7,8 +7,8 @@ terraform {
   }
   backend "azurerm" {
 
-    resource_group_name  = "rg-infra"
-    storage_account_name = "iaccode"
+    resource_group_name  = "lighthouse-rg"
+    storage_account_name = "nucelotidz"
     container_name       = "states"
 
   }
