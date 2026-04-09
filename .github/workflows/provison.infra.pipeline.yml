@@ -21,13 +21,13 @@ jobs:
     environment: test
     timeout-minutes: 720
     env:
-      ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
+      ARM_CLIENT_ID: 0cf77ff5-21d4-44c7-ab69-880b866a3016
       ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
       ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
-      STATESTORAGE: iaccode
+      STATESTORAGE: nucelotidz
       STATECONTAINER: states
-      STATERG: rg-infra
+      STATERG: lighthouse-rg
     defaults:
       run:
         shell: bash
